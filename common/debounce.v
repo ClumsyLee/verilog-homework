@@ -27,7 +27,7 @@ module debounce(clk,key_i,key_o);
         else if (count == NUMBER) begin
             key_o_temp <= key_m;
         end
-        else count <= count+1;
+        else count <= count+1'b1;
     end
 endmodule
 
