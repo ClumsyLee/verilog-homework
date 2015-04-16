@@ -11,9 +11,11 @@ input clk;
 debounce debounce1(clk, BTNS, button_clk);
 
 wire [3:0] digit;
+wire [6:0] bcd;
 wire clk1, clk2, clk3;
-BCD7 bcd71(digit, leds);
-assign led = ~digit;  // Display the digit
+
+BCD7 bcd71(digit, bcd);
+assign leds = ~bcd;  // Display the digit
 
 TT Q0(digit[0], clk1, 1'b1, button_clk, SW0);
 TT Q1(digit[1], clk2, 1'b1, clk1, SW0);
