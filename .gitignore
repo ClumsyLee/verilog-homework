@@ -1,2 +1,6 @@
 # Executable
 *.out
+
+# Sublime project files
+*.sublime-project
+*.sublime-workspace
