@@ -7,7 +7,7 @@ input BTNS;
 input clk;
 
 // Construct a clock from button
-// wire button_clk = BTNS;
+// wire button_clk = BTNS;  // for debugging
 debounce debounce1(clk, BTNS, button_clk);
 
 wire [3:0] digit;
