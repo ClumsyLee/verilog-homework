@@ -1,0 +1,16 @@
+NET "SW0" LOC = T10;
+
+NET "leds[6]" LOC = T17;
+NET "leds[5]" LOC = T18;
+NET "leds[4]" LOC = U17;
+NET "leds[3]" LOC = U18;
+NET "leds[2]" LOC = M14;
+NET "leds[1]" LOC = N14;
+NET "leds[0]" LOC = L14;
+
+NET "BTNS" LOC = B8;  // The button in the middle
+
+// System clock
+NET "clk" LOC = V10;
+NET "clk" TNM_NET = clk;
+TIMESPEC TS_clk = PERIOD "clk" 10 ns HIGH 5 ns;
