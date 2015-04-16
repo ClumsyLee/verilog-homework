@@ -3,7 +3,7 @@ module debounce(clk,key_i,key_o);
     input key_i;
     output key_o;
 
-    parameter NUMBER = 24'd00_000_001;  //delay 0.1s
+    parameter NUMBER = 24'd10_000_000;  //delay 0.1s
     parameter NBITS = 24;
 
     reg [NBITS-1:0] count;
