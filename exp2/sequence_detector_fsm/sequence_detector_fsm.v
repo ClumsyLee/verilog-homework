@@ -21,7 +21,7 @@ parameter S0 = 3'd0,
 reg [2:0] next_state;
 
 // Update state.
-always @(posedge clk or negedge reset) begin
+always @(posedge clk or posedge reset) begin
     if (~reset)
         state <= 0;
     else
