@@ -18,8 +18,7 @@ always #5 clk = ~clk;
 
 // Test data.
 initial begin
-    reset = 0;
-    #1 reset = 1;
+    #1 reset = 0;
 
     data_in = 0;
     #10 data_in = 0;
