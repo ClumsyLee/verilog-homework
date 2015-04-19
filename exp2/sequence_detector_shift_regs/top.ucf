@@ -1,0 +1,18 @@
+NET "data_out" LOC = U16;
+
+NET "shift_regs[6]" LOC = T11;
+NET "shift_regs[5]" LOC = R11;
+NET "shift_regs[4]" LOC = N11;
+NET "shift_regs[3]" LOC = M11;
+NET "shift_regs[2]" LOC = V15;
+NET "shift_regs[1]" LOC = U15;
+NET "shift_regs[0]" LOC = V16;
+
+NET "reset" LOC = A8;    // BTNU
+NET "button" LOC = B8;   // BTNS
+NET "data_in" LOC = T9;  // SW1
+
+// System clock
+NET "clk" LOC = V10;
+NET "clk" TNM_NET = clk;
+TIMESPEC TS_clk = PERIOD "clk" 10 ns HIGH 5 ns;
