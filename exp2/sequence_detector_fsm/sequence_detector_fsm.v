@@ -22,8 +22,8 @@ reg [2:0] next_state;
 
 // Update state.
 always @(posedge clk or posedge reset) begin
-    if (~reset)
-        state <= 0;
+    if (reset)
+        state <= S0;
     else
         state <= next_state;
 end
