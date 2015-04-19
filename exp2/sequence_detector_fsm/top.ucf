@@ -1,0 +1,14 @@
+NET "data_out" LOC = U16;
+
+NET "state[2]" LOC = T11;
+NET "state[1]" LOC = R11;
+NET "state[0]" LOC = N11;
+
+NET "reset" LOC = A8;    // BTNU
+NET "button" LOC = B8;   // BTNS
+NET "data_in" LOC = T9;  // SW1
+
+// System clock
+NET "clk" LOC = V10;
+NET "clk" TNM_NET = clk;
+TIMESPEC TS_clk = PERIOD "clk" 10 ns HIGH 5 ns;
