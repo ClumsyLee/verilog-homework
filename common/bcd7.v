@@ -1,4 +1,3 @@
-`timescale 1ns/1ns
 module BCD7(din,dout);
 input [3:0] din;
 output [6:0] dout;
