@@ -12,7 +12,7 @@ always @(signal) begin
         // Use a higher range.
         if (counter >= RATIO) begin
             counter <= 1;
-            new_signal = ~new_signal  // Flip.
+            new_signal <= ~new_signal  // Flip.
         end else begin
             counter <= counter + 1;
         end
