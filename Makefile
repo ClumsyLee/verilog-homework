@@ -1,6 +1,13 @@
 MODULES = $(wildcard exp*/*/)
 
-.PHONY: all
-all:
+.PHONY: all common modules
+
+all: common modules
+
+common:
+	@echo Building common
+	@$(MAKE) -C common/
+
+modules:
 	@$(foreach module, $(MODULES), echo Building module $(module);\
 								   $(MAKE) -C $(module);)
