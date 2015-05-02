@@ -10,9 +10,11 @@ module freq_meter
 
 output [3:0] anodes;
 output [7:0] cathodes;
-output range_now = range;
+output range_now;
 
 input signal, range, clk;
+
+assign range_now = range;
 
 wire new_signal;
 divider divider1(new_signal, range, signal);
@@ -31,8 +33,8 @@ counter #(16, 9999) four_bit_counter(num, new_signal, 1'b1, reset_n);
 // Reset counter on control_clk
 always @(posedge control_clk) begin
     led_num <= num;
-    reset_n <= 0
-    @(posedge clk) reset_n <= 1
+    reset_n <= 0;
+    @(posedge clk) reset_n <= 1;
 end
 
 // Display the number
