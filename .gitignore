@@ -12,3 +12,6 @@ sim
 
 # Large binaries
 *.pdf
+
+# Result files
+homework*/*/result.txt
