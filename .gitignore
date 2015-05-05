@@ -5,3 +5,10 @@ sim
 # Sublime project files
 *.sublime-project
 *.sublime-workspace
+
+# LaTeX files
+*.aux
+*.log
+
+# Large binaries
+*.pdf
