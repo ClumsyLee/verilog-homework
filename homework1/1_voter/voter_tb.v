@@ -1,6 +1,6 @@
 module voter_tb;
 
-reg [2:0] agree;
+reg [2:0] agree = 0;
 wire indicator;
 
 voter voter1(indicator, agree);
@@ -8,7 +8,6 @@ voter voter1(indicator, agree);
 initial begin
     $monitor("agree: %b, indicator: %b", agree, indicator);
 
-    #5 agree = 3'b000;
     #5 agree = 3'b001;
     #5 agree = 3'b010;
     #5 agree = 3'b011;
