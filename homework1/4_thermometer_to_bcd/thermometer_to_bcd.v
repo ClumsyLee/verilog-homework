@@ -19,6 +19,6 @@ assign bcd = (thermometer == 16'b0) ? 0 :
              (thermometer == 16'b1111111111111) ? {4'd1, 4'd2} :
              (thermometer == 16'b11111111111111) ? {4'd1, 4'd3} :
              (thermometer == 16'b111111111111111) ? {4'd1, 4'd4} :
-             (thermometer == 16'b1111111111111111) ? {4'd1, 4'd5} : {4'd1, 4'd6};
-
+             (thermometer == 16'b1111111111111111) ? {4'd1, 4'd5} :
+                                                     {4'd1, 4'd6};
 endmodule
