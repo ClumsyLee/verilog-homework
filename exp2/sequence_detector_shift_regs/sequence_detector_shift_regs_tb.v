@@ -11,8 +11,8 @@ sequence_detector_shift_regs detector(data_out, shift_regs,
                                       reset, data_in, clk);
 
 // Set monitor.
-initial $monitor($time, " reset: %b, data_in: %b, data_out: %b, shift_regs: %b",
-                 reset, data_in, data_out, shift_regs);
+always #10 $display($time, " data_in: %b, data_out: %b, shift_regs: %b",
+                    data_in, data_out, shift_regs);
 
 // Set clock.
 always #5 clk = ~clk;
@@ -47,7 +47,7 @@ initial begin
     #10 data_in = 0;
     #10 data_in = 0;
 
-    $finish;
+    #10 $finish;
 end
 
 endmodule
