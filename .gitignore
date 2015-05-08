@@ -9,6 +9,7 @@ sim
 # LaTeX files
 *.aux
 *.log
+*.pyg
 
 # Large binaries
 *.pdf
