@@ -1,24 +1,23 @@
 module divider(new_signal, range, signal);
 
-output reg new_signal;
+output new_signal;
 input range, signal;
 
-parameter RATIO = 10;
+parameter RATIO = 10,
+          HALF_RATIO = RATIO / 2;
 
 reg [3:0] counter;
 
-always @(signal) begin
-    if (range) begin
-        // Use a higher range.
-        if (counter >= RATIO) begin
-            counter <= 1;
-            new_signal <= ~new_signal;  // Flip.
-        end else begin
-            counter <= counter + 1;
-        end
+reg divided_signal = 0;
+assign new_signal = (range ? divided_signal : signal);
+
+always @(posedge signal) begin
+    // Use a higher range.
+    if (counter >= HALF_RATIO) begin
+        counter <= 1;
+        divided_signal <= ~divided_signal;  // Flip.
     end else begin
-        // Just pass the signal
-        new_signal <= signal;
+        counter <= counter + 1'b1;
     end
 end
 
