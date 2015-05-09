@@ -13,21 +13,21 @@ assign cathodes = ~{bcd, 1'b0};
 
 always @(posedge clk) begin
     case (anodes)
-        4'b1000: begin
+        4'b0111: begin
             digit <= (num / 100) % 10;
-            anodes <= 4'b0100;
+            anodes <= 4'b1011;
         end
-        4'b0100: begin
+        4'b1011: begin
             digit <= (num / 10) % 10;
-            anodes <= 4'b0010;
+            anodes <= 4'b1101;
         end
-        4'b0010: begin
+        4'b1101: begin
             digit <= num % 10;
-            anodes <= 4'b0001;
+            anodes <= 4'b1110;
         end
         default: begin
             digit <= (num / 1000) % 10;
-            anodes <= 4'b1000;
+            anodes <= 4'b0111;
         end
     endcase
 end
