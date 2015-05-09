@@ -11,7 +11,7 @@ wire [6:0] bcd;
 BCD7 bcd71(digit, bcd);
 assign cathodes = ~{bcd, 1'b0};
 
-always @(clk) begin
+always @(posedge clk) begin
     case (anodes)
         4'b1000: begin
             digit <= (num / 100) % 10;
