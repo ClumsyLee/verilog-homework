@@ -5,7 +5,7 @@ output [7:0] cathodes;
 input [15:0] num;
 input clk;
 
-reg [3:0] digit;
+reg [3:0] digit = 0;
 wire [6:0] bcd;
 
 BCD7 bcd71(digit, bcd);

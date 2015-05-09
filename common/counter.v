@@ -3,7 +3,7 @@ module counter(num, signal, enable, reset_n);
 parameter WIDTH = 4,
           MAX = (1 << WIDTH) - 1;
 
-output reg [WIDTH - 1:0] num;
+output reg [WIDTH - 1:0] num = 0;
 input signal, enable, reset_n;
 
 wire enabled_signal = signal & enable;

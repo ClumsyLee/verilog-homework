@@ -26,7 +26,6 @@ watchmaker #(100_000) scan_watchmaker(scan_clk, clk);
 
 // Central control.
 wire [15:0] num;
-reg [15:0] led_num;  // Number to be displayed on the LED.
 wire reset_n;
 counter #(16, 9999) four_bit_counter(num, new_signal, 1'b1, reset_n);
 
@@ -47,6 +46,7 @@ always @(posedge clk) begin
     state <= next_state;
 end
 
+reg [15:0] led_num = 0;  // Number to be displayed on the LED.
 always @(posedge control_clk) begin
     led_num <= num;
 end
