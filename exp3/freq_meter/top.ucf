@@ -21,4 +21,4 @@ NET "anodes[0]" LOC = N16;
 // System clock
 NET "sysclk" LOC = V10;
 NET "sysclk" TNM_NET = clk;
-TIMESPEC TS_clk = PERIOD "sysclk" 10 ns HIGH 5 ns;
+TIMESPEC TS_clk = PERIOD "clk" 10 ns HIGH 5 ns;
