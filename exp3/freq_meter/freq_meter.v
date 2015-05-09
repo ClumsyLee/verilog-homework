@@ -52,6 +52,6 @@ always @(posedge control_clk) begin
 end
 
 // Display the number
-led led1(anodes, cathodes, num, scan_clk);
+led led1(anodes, cathodes, led_num, scan_clk);
 
 endmodule
