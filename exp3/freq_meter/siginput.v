@@ -32,9 +32,9 @@ always @(posedge sysclk)  // 按divide分频
 begin
     if(state == 0)
         sigin = ~sigin;
-    state = state + 21'b0_00__0000_0000_0000_0000_10;
+    state = state + 21'd2;
     if(state == divide)
-        state = 27'b000_0000_0000_0000_0000_0000_0000;
+        state = 0;
 end
 
 endmodule
