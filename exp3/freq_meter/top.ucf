@@ -1,0 +1,24 @@
+NET "testmode[1]" LOC = T9;
+NET "testmode[0]" LOC = T10;
+
+NET "modecontrol" LOC = T5;
+NET "higfreq" LOC = T11;
+
+NET "cathodes[7]" LOC = T17;
+NET "cathodes[6]" LOC = T18;
+NET "cathodes[5]" LOC = U17;
+NET "cathodes[4]" LOC = U18;
+NET "cathodes[3]" LOC = M14;
+NET "cathodes[2]" LOC = N14;
+NET "cathodes[1]" LOC = L14;
+NET "cathodes[0]" LOC = M13;
+
+NET "anodes[3]" LOC = P17;
+NET "anodes[2]" LOC = P18;
+NET "anodes[1]" LOC = N15;
+NET "anodes[0]" LOC = N16;
+
+// System clock
+NET "sysclk" LOC = V10;
+NET "sysclk" TNM_NET = clk;
+TIMESPEC TS_clk = PERIOD "clk" 10 ns HIGH 5 ns;

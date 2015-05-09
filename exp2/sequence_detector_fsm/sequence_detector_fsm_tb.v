@@ -10,8 +10,8 @@ wire [2:0] state;
 sequence_detector_fsm fsm(data_out, state, reset, data_in, clk);
 
 // Set monitor.
-initial $monitor($time, " reset: %b, data_in: %b, data_out: %b, state: %b",
-                 reset, data_in, data_out, state);
+always #10 $display($time, " data_in: %b, data_out: %b, state: %b",
+                    data_in, data_out, state);
 
 // Set clock.
 always #5 clk = ~clk;
@@ -46,7 +46,7 @@ initial begin
     #10 data_in = 0;
     #10 data_in = 0;
 
-    $finish;
+    #10 $finish;
 end
 
 endmodule

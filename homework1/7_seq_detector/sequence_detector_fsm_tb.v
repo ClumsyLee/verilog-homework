@@ -1,53 +1,48 @@
-module stimulus;
+module sequence_detector_fsm_tb;
 
 reg clk = 0;
-reg reset = 1;
+reg reset_n = 0;
 reg data_in = 0;
 
 wire data_out;
-wire [6:0] shift_regs;
 
-sequence_detector_shift_regs detector(data_out, shift_regs,
-                                      reset, data_in, clk);
-
-// Set monitor.
-always #10 $display($time, " data_in: %b, data_out: %b, shift_regs: %b",
-                    data_in, data_out, shift_regs);
+sequence_detector_fsm fsm(data_out, data_in, reset_n, clk);
 
 // Set clock.
 always #5 clk = ~clk;
+always #10 $display($time, " reset_n: %b, data_in: %b, data_out: %b, state: %b",
+                    reset_n, data_in, data_out, fsm.state);
 
 // Test data.
 initial begin
-    #1 reset = 0;
-
+    #2 reset_n = 1;
     data_in = 0;
     #10 data_in = 0;
     #10 data_in = 1;
     #10 data_in = 0;
     #10 data_in = 1;
-    #10 data_in = 0;
     #10 data_in = 1;
     #10 data_in = 1;
-    #10 data_in = 0;
-    #10 data_in = 1;
-    #10 data_in = 0;
-    #10 data_in = 1;
-    #10 data_in = 1;
-    #10 data_in = 1;
-    #10 data_in = 0;
-    #10 data_in = 0;
-    #10 data_in = 0;
     #10 data_in = 1;
     #10 data_in = 0;
     #10 data_in = 1;
     #10 data_in = 0;
     #10 data_in = 1;
     #10 data_in = 1;
+    #10 data_in = 1;
+    #10 data_in = 1;
+    #10 data_in = 1;
+    #10 data_in = 1;
+    #10 data_in = 1;
     #10 data_in = 0;
+    #10 data_in = 1;
+    #10 data_in = 0;
+    #10 data_in = 1;
+    #10 data_in = 1;
+    #10 data_in = 1;
     #10 data_in = 0;
 
-    #10 $finish;
+    $finish;
 end
 
 endmodule

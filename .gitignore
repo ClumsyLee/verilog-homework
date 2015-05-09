@@ -1,6 +1,18 @@
 # Executable
 *.out
+sim
 
 # Sublime project files
 *.sublime-project
 *.sublime-workspace
+
+# LaTeX files
+*.aux
+*.log
+*.pyg
+
+# Large binaries
+*.pdf
+
+# Result files
+homework*/*/result.txt
