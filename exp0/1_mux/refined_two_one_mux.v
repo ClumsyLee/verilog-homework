@@ -7,11 +7,11 @@ wire nots;
 wire choose_a, choose_b;
 wire bridge;
 
-not #(5) (nots, s);
-and #(5) (choose_a, nots, a);
-and #(5) (choose_b, s, b);
-and #(5) (bridge, a, b);
+not #(1) (nots, s);
+and #(1) (choose_a, nots, a);
+and #(1) (choose_b, s, b);
+and #(1) (bridge, a, b);
 
-or #(5) (y, choose_a, choose_b, bridge);
+or #(1) (y, choose_a, choose_b, bridge);
 
 endmodule
