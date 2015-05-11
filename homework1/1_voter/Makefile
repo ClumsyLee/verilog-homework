@@ -1,4 +1,1 @@
-COMPILER = iverilog
-
-sim: *.v
-	@$(COMPILER) -Wall -o $@ $^
+../../common/basicMakefile
