@@ -5,7 +5,7 @@ input key, clk;
 
 parameter CLK_PER_MS = 1;
 
-integer current_clks, first_arrival_clks;
+reg [31:0] current_clks, first_arrival_clks;
 reg [2:0] state = 0;
 
 assign ms = current_clks / CLK_PER_MS;
