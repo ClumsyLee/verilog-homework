@@ -15,7 +15,10 @@ always @(posedge key) begin
     if (state == 2'd1)  // Need to record the clks here.
         first_arrival_clks <= current_clks;
 
-    state <= state + 1'b1;
+    if (state < 4)
+        state <= state + 1'b1;
+    else
+        state <= 0;
 end
 
 // Calculate output.
