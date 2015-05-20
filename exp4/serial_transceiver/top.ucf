@@ -1,0 +1,7 @@
+NET "dout" LOC = N17;
+NET "din" LOC = N18;
+
+// System clock
+NET "clk" LOC = V10;
+NET "clk" TNM_NET = clk;
+TIMESPEC TS_clk = PERIOD "clk" 10 ns HIGH 5 ns;
