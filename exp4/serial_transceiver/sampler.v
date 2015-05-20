@@ -36,7 +36,7 @@ always @(*) begin
     end
 
     SAMPLING: begin  // Cycle = SAMPLE_RATIO.
-        next_state = (bit_count == 4'd8 ? STANDING_BY : SAMPLING);
+        next_state = (bit_count == 4'd9 ? STANDING_BY : SAMPLING);
 
         if (count < SAMPLE_RATIO - 1) begin
             next_count = count + 4'b1;
@@ -64,6 +64,7 @@ end
 
 // Calculate outputs.
 assign sample_sig = (state == SAMPLING &&
-                     count == SAMPLE_RATIO - 4'b1);
+                     count == SAMPLE_RATIO - 4'b1 &&
+                     bit_count < 4'd8);
 
 endmodule
