@@ -4,7 +4,7 @@ output sample_sig;
 input din, sample_clk;
 
 parameter SAMPLE_RATIO = 16;
-localparam PADDING_TIME = SAMPLE_RATIO / 2 - 1;
+localparam PADDING_TIME = SAMPLE_RATIO / 2;
 
 reg [1:0] state = 0, next_state;
 localparam STANDING_BY = 2'd0,
