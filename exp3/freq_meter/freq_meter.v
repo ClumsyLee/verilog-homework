@@ -46,10 +46,18 @@ always @(posedge clk) begin
     state <= next_state;
 end
 
-reg [15:0] led_num = 0;  // Number to be displayed on the LED.
+reg lock = 0;
 always @(posedge control_clk) begin
-    led_num <= num;
+    if (lock) begin
+        lock <= 1'b0;
+    end else begin
+        lock <= 1'b1;
+        saved_num = num;
+    end
 end
+
+reg [15:0] saved_num;
+wire [15:0] led_num = (lock ? saved_num : num);  // Number to be displayed on the LED.
 
 // Display the number
 led led1(anodes, cathodes, led_num, scan_clk);
