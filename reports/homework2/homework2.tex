@@ -1,0 +1,73 @@
+\documentclass[11pt,a4paper]{article}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+\usepackage[top=1in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+\usepackage{float}
+\usepackage{fontspec}
+\newfontfamily\zhfont[BoldFont=STHeiti]{STFangsong}
+\newfontfamily\zhpunctfont{STFangsong}
+\setmainfont{Times New Roman}
+\usepackage{indentfirst}
+\usepackage{zhspacing}
+\zhspacing
+
+% 代码展示
+\usepackage{color}
+\definecolor{bg}{rgb}{0.152941, 0.156863, 0.133333}
+\usepackage{minted}
+\usemintedstyle{monokai}
+\setmonofont{DejaVuSansMono}
+
+\usepackage{fancyvrb}  % 调整 Verbatim 中字体
+
+% 调整 quotation 字体
+\let\quotationOLD\quotation
+\def\quotation{\quotationOLD\footnotesize}
+
+\usepackage{pdfpages}  % 附上 pdf 版综合结果
+
+\newcommand{\problem}[5] {
+  \section{#1}
+
+  \subsection{电路结构}
+  \begin{figure}[H]
+    \centering
+      \includegraphics{#3}
+    \caption{#1}
+  \end{figure}
+
+  \subsection{代码}
+  \subsubsection{元件代码}
+  \inputminted[bgcolor=bg, linenos=true, fontsize=\footnotesize]{verilog}
+  {#2/#4.v}
+
+  \subsubsection{测试代码}
+  \inputminted[bgcolor=bg, linenos=true, fontsize=\footnotesize]{verilog}
+  {#2/#4_tb.v}
+
+  \subsection{仿真结果}
+  \VerbatimInput[fontsize=\scriptsize, numbers=left]
+  {#2/result.txt}
+
+  \subsection{仿真波形}
+  \begin{figure}[H]
+    \centering
+      \includegraphics[width=\textwidth]{#5}
+    \caption{#1仿真波形}
+  \end{figure}
+
+
+}
+
+\begin{document}
+
+\title{作业 2}
+\author{无36$\quad$李思涵$\quad$2013011187}
+\maketitle
+
+\problem{串行发送电路}{../../homework2/1_serial_sender}{h2_p1}{serial_sender}{remote_decoder_wave}
+\problem{秒表}{../../homework2/2_stop_watch}{h2_p2}{stop_watch}{serial_sender_wave}
+\problem{遥控器接收解码电路}{../../homework2/3_remote_decoder}{h2_p3}{remote_decoder}{stop_watch_wave}
+
+\end{document}
+
