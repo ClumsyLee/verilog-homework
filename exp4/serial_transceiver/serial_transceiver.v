@@ -25,7 +25,10 @@ wire rx_status;
 receiver receiver1(rx_data, rx_status, din, clk, sample_clk);
 
 // Sender.
-wire [7:0] tx_data = (rx_data[7] ? ~rx_data : rx_data);
+wire tx_status;
+wire tx_en = tx_status & rx_status;  // Enable only when in idle state.
 
+wire [7:0] tx_data = (rx_data[7] ? ~rx_data : rx_data);
+sender sender1(dout, tx_status, tx_data, tx_en, clk, send_clk);
 
 endmodule
