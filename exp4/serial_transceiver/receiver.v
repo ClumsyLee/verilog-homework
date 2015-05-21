@@ -13,10 +13,11 @@ wire rst_n = ~rx_status;
 
 always @(posedge sample_sig or negedge rst_n) begin
     if(~rst_n) begin
+        shift_reg <= 0;
         counter <= 0;
     end else begin
         shift_reg <= {din, shift_reg[7:1]};
-        counter <= counter + 3'b1;
+        counter <= counter + 4'b1;
     end
 end
 
