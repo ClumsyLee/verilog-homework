@@ -1,6 +1,7 @@
 module sender(dout, tx_status, tx_data, tx_en, clk, send_clk);
 
-output dout, tx_status;
+output dout;
+output reg tx_status = 1;
 input [7:0] tx_data;
 input tx_en, clk, send_clk;
 
@@ -20,7 +21,7 @@ always @(posedge send_clk or negedge rst_n) begin
         shift_reg <= {tx_data, 2'b01};  // Load data.
         counter <= 0;
     end else begin
-        shift_reg <= {1'b1, shift_reg[7:1]};
+        shift_reg <= {1'b1, shift_reg[9:1]};
 
         if (counter < COUNTER_MAX)
             counter <= counter + 4'b1;
