@@ -19,6 +19,13 @@ wire sample_clk, send_clk;
 watchmaker #(SAMPLE_CLK_RATIO) sample_watch(sample_clk, clk);
 watchmaker #(SEND_CLK_RATIO) send_watch(send_clk, clk);
 
+// Receiver.
+wire [7:0] rx_data;
+wire rx_status;
+receiver receiver1(rx_data, rx_status, din, clk, sample_clk);
+
+// Sender.
+wire [7:0] tx_data = (rx_data[7] ? ~rx_data : rx_data);
 
 
 endmodule
