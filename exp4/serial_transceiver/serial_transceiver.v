@@ -1,3 +1,5 @@
+`timescale 10ns/1ns
+
 module serial_transceiver(dout, led, cathodes, anodes, din, sws, clk);
 
 output dout;

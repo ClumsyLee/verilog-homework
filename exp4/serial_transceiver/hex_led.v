@@ -1,3 +1,5 @@
+`timescale 10ns/1ns
+
 module hex_led(anodes, cathodes, num, clk);
 
 output reg [3:0] anodes;

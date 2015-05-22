@@ -1,3 +1,5 @@
+`timescale 10ns/1ns
+
 module serial_transceiver_tb;
 
 wire dout;

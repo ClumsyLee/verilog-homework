@@ -1,3 +1,5 @@
+`timescale 10ns/1ns
+
 module sampler(sample_sig, din, sample_clk);
 
 output reg sample_sig;

@@ -1,3 +1,5 @@
+`timescale 10ns/1ns
+
 module receiver(rx_data, rx_status, din, clk, sample_clk);
 
 output reg [7:0] rx_data;

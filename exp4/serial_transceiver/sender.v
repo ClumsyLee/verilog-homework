@@ -1,3 +1,5 @@
+`timescale 10ns/1ns
+
 module sender(dout, tx_status, tx_data, tx_en, clk, send_clk);
 
 output dout;
