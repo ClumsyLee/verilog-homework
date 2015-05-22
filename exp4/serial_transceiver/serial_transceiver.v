@@ -42,8 +42,8 @@ sender sender1(dout, tx_status, tx_data, tx_en, clk, send_clk);
 
 
 // Output.
-wire datas = (sws[0] ? tx_data : rx_data);  // Choose between datas.
-wire status = {6'b0, rx_status, tx_status};
+wire [7:0] datas = (sws[0] ? tx_data : rx_data);  // Choose between datas.
+wire [7:0] status = {6'b0, rx_status, tx_status};
 
 assign led = (sws[1] ? status : datas);
 hex_led hex_led1(anodes, cathodes, {rx_data, tx_data}, led_scan_clk);
