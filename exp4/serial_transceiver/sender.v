@@ -1,17 +1,17 @@
 module sender(dout, tx_status, tx_data, tx_en, clk, send_clk);
 
 output dout;
-output reg tx_status = 1;
+output reg tx_status;
 input [7:0] tx_data;
 input tx_en, clk, send_clk;
 
 // 1 padding, 1 start-bit, 8 data-bits, 1 end-bit.
 localparam COUNTER_MAX = 4'd11;
 
-reg [8:0] shift_reg = 9'b1_1111_1111;
+reg [8:0] shift_reg;
 assign dout = shift_reg[0];
 
-reg [3:0] counter = COUNTER_MAX;
+reg [3:0] counter = 0;
 wire rst_n = ~tx_en;
 
 always @(posedge send_clk or negedge rst_n) begin

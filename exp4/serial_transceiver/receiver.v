@@ -1,13 +1,13 @@
 module receiver(rx_data, rx_status, din, clk, sample_clk);
 
-output reg [7:0] rx_data = 0;
-output reg rx_status = 0;
+output reg [7:0] rx_data;
+output reg rx_status;
 input din, clk, sample_clk;
 
 wire sample_sig;
 sampler sampler1(sample_sig, din, sample_clk);
 
-reg [7:0] shift_reg = 0;
+reg [7:0] shift_reg;
 reg [3:0] counter = 0;
 wire rst_n = ~rx_status;
 

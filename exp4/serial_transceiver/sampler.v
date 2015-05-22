@@ -1,12 +1,12 @@
 module sampler(sample_sig, din, sample_clk);
 
-output reg sample_sig = 0;
+output reg sample_sig;
 input din, sample_clk;
 
 parameter SAMPLE_RATIO = 16;
 localparam PADDING_TIME = SAMPLE_RATIO / 2;
 
-reg [1:0] state = 0, next_state;
+reg [1:0] state, next_state;
 localparam STANDING_BY = 2'd0,
            PADDING = 2'd1,
            SAMPLING = 2'd2;
