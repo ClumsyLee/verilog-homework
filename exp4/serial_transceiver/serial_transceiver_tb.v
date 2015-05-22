@@ -3,7 +3,7 @@ module serial_transceiver_tb;
 wire dout;
 reg din = 1, clk = 0;
 
-serial_transceiver transceiver(dout, din, clk);
+serial_transceiver transceiver(dout, , , , , din, clk);
 
 always #1 clk = ~clk;
 

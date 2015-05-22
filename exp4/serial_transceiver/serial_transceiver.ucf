@@ -1,6 +1,8 @@
 NET "dout" LOC = N18;
 NET "din" LOC = N17;
 
+# NET "rx_status" LOC = V16;
+# NET "tx_status" LOC = U16;
 NET "rx_data[7]" LOC = T11;
 NET "rx_data[6]" LOC = R11;
 NET "rx_data[5]" LOC = N11;
@@ -9,6 +11,21 @@ NET "rx_data[3]" LOC = V15;
 NET "rx_data[2]" LOC = U15;
 NET "rx_data[1]" LOC = V16;
 NET "rx_data[0]" LOC = U16;
+
+
+NET "cathodes[7]" LOC = T17;
+NET "cathodes[6]" LOC = T18;
+NET "cathodes[5]" LOC = U17;
+NET "cathodes[4]" LOC = U18;
+NET "cathodes[3]" LOC = M14;
+NET "cathodes[2]" LOC = N14;
+NET "cathodes[1]" LOC = L14;
+NET "cathodes[0]" LOC = M13;
+
+NET "anodes[3]" LOC = P17;
+NET "anodes[2]" LOC = P18;
+NET "anodes[1]" LOC = N15;
+NET "anodes[0]" LOC = N16;
 
 // System clock
 NET "clk" LOC = V10;
