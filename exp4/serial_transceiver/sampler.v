@@ -43,7 +43,7 @@ always @(*) begin
             next_bit_count = bit_count;
         end else begin
             next_count = 4'b0;
-            next_bit_count = bit_count + 1;
+            next_bit_count = bit_count + 4'b1;
         end
     end
 
