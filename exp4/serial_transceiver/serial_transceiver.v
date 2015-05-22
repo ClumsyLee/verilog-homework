@@ -42,12 +42,10 @@ sender sender1(dout, tx_status, tx_data, tx_en, clk, send_clk);
 
 
 // Output.
-wire [7:0] datas = (sws[0] ? tx_data : rx_data);  // Choose between datas.
-wire [7:0] status = (sws[0] ? current_load : {6'b0, rx_status, tx_status});
-
-assign led = (sws[1] ? status : datas);
+// Numbers.
 hex_led hex_led1(anodes, cathodes, {rx_data, tx_data}, led_scan_clk);
 
+// LEDs.
 // Current load.
 reg [7:0] current_load = 0;
 // Display load between 4 & 512 bit/s.
@@ -74,5 +72,12 @@ always @(posedge send_clk) begin
             load_count <= load_count;
     end
 end
+
+// Switches.
+wire [7:0] datas = (sws[0] ? tx_data : rx_data);  // Choose between datas.
+wire [7:0] status = (sws[0] ? current_load : {6'b0, rx_status, tx_status});
+
+assign led = (sws[1] ? status : datas);
+
 
 endmodule
