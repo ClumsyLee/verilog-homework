@@ -3,8 +3,6 @@ module sampler(sample_sig, din, sample_clk);
 output reg sample_sig = 0;
 input din, sample_clk;
 
-wire next_sample_sig;
-
 parameter SAMPLE_RATIO = 16;
 localparam PADDING_TIME = SAMPLE_RATIO / 2;
 
@@ -16,6 +14,7 @@ localparam STANDING_BY = 2'd0,
 // Assume SAMPLE_RATIO <= 16
 reg [3:0] count = 0, next_count,
           bit_count = 0, next_bit_count;
+wire next_sample_sig;
 
 // Calculate next values.
 always @(*) begin
@@ -57,6 +56,10 @@ always @(*) begin
     endcase
 end
 
+assign next_sample_sig = (state == SAMPLING &&
+                          count == SAMPLE_RATIO - 4'd2 &&
+                          bit_count < 4'd8);
+
 // Update values.
 always @(posedge sample_clk) begin
     state <= next_state;
@@ -66,8 +69,6 @@ always @(posedge sample_clk) begin
 end
 
 // Calculate outputs.
-assign next_sample_sig = (state == SAMPLING &&
-                          count == SAMPLE_RATIO - 4'd2 &&
-                          bit_count < 4'd8);
+// Nothing, sample_sig is already calculated.
 
 endmodule
