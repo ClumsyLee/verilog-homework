@@ -52,8 +52,8 @@ hex_led hex_led1(anodes, cathodes, {rx_data, tx_data}, led_scan_clk);
 reg [7:0] current_load = 0;
 // Display load between 4 & 512 bit/s.
 reg [10:0] count = 0, load_count = 0;
-always @(posedge sample_clk) begin
-    if (count == 0) begin
+always @(posedge send_clk) begin
+    if (count == 11'd512) begin
         current_load[7] <= (load_count >= 11'd4);
         current_load[6] <= (load_count >= 11'd8);
         current_load[5] <= (load_count >= 11'd16);
@@ -63,6 +63,7 @@ always @(posedge sample_clk) begin
         current_load[1] <= (load_count >= 11'd256);
         current_load[0] <= (load_count >= 11'd512);
 
+        count <= 0;
         load_count <= (tx_status ? 1'b0 : 1'b1);
     end else begin
         count <= count + 1'b1;
