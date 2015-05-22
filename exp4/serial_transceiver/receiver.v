@@ -2,7 +2,7 @@
 
 module receiver(rx_data, rx_status, din, clk, sample_clk);
 
-output reg [7:0] rx_data;
+output reg [7:0] rx_data = 0;
 output reg rx_status;
 input din, clk, sample_clk;
 
