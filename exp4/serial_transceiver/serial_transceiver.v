@@ -43,9 +43,35 @@ sender sender1(dout, tx_status, tx_data, tx_en, clk, send_clk);
 
 // Output.
 wire [7:0] datas = (sws[0] ? tx_data : rx_data);  // Choose between datas.
-wire [7:0] status = {6'b0, rx_status, tx_status};
+wire [7:0] status = (sws[0] ? current_load : {6'b0, rx_status, tx_status});
 
 assign led = (sws[1] ? status : datas);
 hex_led hex_led1(anodes, cathodes, {rx_data, tx_data}, led_scan_clk);
+
+// Current load.
+reg [7:0] current_load = 0;
+// Display load between 4 & 512 bit/s.
+reg [10:0] count = 0, load_count = 0;
+always @(posedge sample_clk) begin
+    if (count == 0) begin
+        current_load[7] <= (load_count >= 11'd4);
+        current_load[6] <= (load_count >= 11'd8);
+        current_load[5] <= (load_count >= 11'd16);
+        current_load[4] <= (load_count >= 11'd32);
+        current_load[3] <= (load_count >= 11'd64);
+        current_load[2] <= (load_count >= 11'd128);
+        current_load[1] <= (load_count >= 11'd256);
+        current_load[0] <= (load_count >= 11'd512);
+
+        load_count <= (tx_status ? 1'b0 : 1'b1);
+    end else begin
+        count <= count + 1'b1;
+
+        if (tx_status == 1'b0)  // Busy.
+            load_count <= load_count + 1'b1;
+        else
+            load_count <= load_count;
+    end
+end
 
 endmodule
