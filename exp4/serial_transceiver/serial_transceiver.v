@@ -1,6 +1,7 @@
-module serial_transceiver(dout, din, clk);
+module serial_transceiver(dout, rx_data, din, clk);
 
 output dout;
+output [7:0] rx_data;  // Make it easier to debug.
 input din, clk;
 
 parameter BAUD_RATE = 9600,
@@ -20,7 +21,6 @@ watchmaker #(SAMPLE_CLK_RATIO) sample_watch(sample_clk, clk);
 watchmaker #(SEND_CLK_RATIO) send_watch(send_clk, clk);
 
 // Receiver.
-wire [7:0] rx_data;
 wire rx_status;
 receiver receiver1(rx_data, rx_status, din, clk, sample_clk);
 
