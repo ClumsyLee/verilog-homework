@@ -1,7 +1,7 @@
-module serial_transceiver(dout, rx_data, cathodes, anodes, din, sws, clk);
+module serial_transceiver(dout, led, cathodes, anodes, din, sws, clk);
 
 output dout;
-output [7:0] rx_data;  // Make it easier to debug.
+output [7:0] led;
 output [7:0] cathodes;
 output [3:0] anodes;
 
@@ -29,6 +29,7 @@ watchmaker #(SEND_CLK_RATIO) send_watch(send_clk, clk);
 watchmaker #(LED_SCAN_RATIO) led_scan_watch(led_scan_clk, clk);
 
 // Receiver.
+wire [7:0] rx_data;
 wire rx_status;
 receiver receiver1(rx_data, rx_status, din, clk, sample_clk);
 
@@ -39,6 +40,12 @@ wire tx_en = rx_status;  // Enable only when in idle state.
 wire [7:0] tx_data = (rx_data[7] ? ~rx_data : rx_data);
 sender sender1(dout, tx_status, tx_data, tx_en, clk, send_clk);
 
-hex_led led(anodes, cathodes, {rx_data, tx_data}, led_scan_clk);
+
+// Output.
+wire datas = (sws[0] ? tx_data : rx_data);  // Choose between datas.
+wire status = {6'b0, rx_status, tx_status};
+
+assign led = (sws[1] ? status : datas);
+hex_led hex_led1(anodes, cathodes, {rx_data, tx_data}, led_scan_clk);
 
 endmodule
