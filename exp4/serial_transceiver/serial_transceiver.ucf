@@ -27,6 +27,9 @@ NET "anodes[2]" LOC = P18;
 NET "anodes[1]" LOC = N15;
 NET "anodes[0]" LOC = N16;
 
+NET "sws[1]" LOC = V16;
+NET "sws[0]" LOC = U16;
+
 // System clock
 NET "clk" LOC = V10;
 NET "clk" TNM_NET = clk;

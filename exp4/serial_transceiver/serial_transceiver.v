@@ -1,9 +1,11 @@
-module serial_transceiver(dout, rx_data, cathodes, anodes, din, clk);
+module serial_transceiver(dout, rx_data, cathodes, anodes, din, sws, clk);
 
 output dout;
 output [7:0] rx_data;  // Make it easier to debug.
 output [7:0] cathodes;
 output [3:0] anodes;
+
+input [1:0] sws;
 input din, clk;
 
 parameter BAUD_RATE = 9600,
@@ -32,7 +34,7 @@ receiver receiver1(rx_data, rx_status, din, clk, sample_clk);
 
 // Sender.
 wire tx_status;
-wire tx_en = tx_status & rx_status;  // Enable only when in idle state.
+wire tx_en = rx_status;  // Enable only when in idle state.
 
 wire [7:0] tx_data = (rx_data[7] ? ~rx_data : rx_data);
 sender sender1(dout, tx_status, tx_data, tx_en, clk, send_clk);
