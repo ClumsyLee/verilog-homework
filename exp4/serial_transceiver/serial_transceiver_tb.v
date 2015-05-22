@@ -10,7 +10,7 @@ always #1 clk = ~clk;
 initial begin
     $monitor($time, " dout: %b, din: %b", dout, din);
 
-    #800000 din = 0;
+    #300000 din = 0;
     #20832 din = 1;
     #20832 din = 1;
     #20832 din = 0;
@@ -21,7 +21,7 @@ initial begin
     #20832 din = 0;
     #20832 din = 1;
 
-    #800000 din = 0;
+    #80000 din = 0;
     #20832 din = 0;
     #20832 din = 1;
     #20832 din = 1;
