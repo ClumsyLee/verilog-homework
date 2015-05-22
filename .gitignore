@@ -1,6 +1,6 @@
 # Executable
 *.out
-sim
+sim*
 
 # Sublime project files
 *.sublime-project
