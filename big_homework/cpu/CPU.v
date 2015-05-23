@@ -2,6 +2,7 @@
 module CPU(reset, clk);
 	input reset, clk;
 	
+	// PC.
 	reg [31:0] PC;
 	wire [31:0] PC_next;
 	always @(posedge reset or posedge clk)
@@ -12,10 +13,14 @@ module CPU(reset, clk);
 	
 	wire [31:0] PC_plus_4;
 	assign PC_plus_4 = PC + 32'd4;
-	
+
+
+	// Read instruction.
 	wire [31:0] Instruction;
 	InstructionMemory instruction_memory1(.Address(PC), .Instruction(Instruction));
 	
+
+	// Generate control signals.
 	wire [1:0] RegDst;
 	wire [1:0] PCSrc;
 	wire Branch;
@@ -35,6 +40,8 @@ module CPU(reset, clk);
 		.MemRead(MemRead),	.MemWrite(MemWrite), .MemtoReg(MemtoReg),
 		.ALUSrc1(ALUSrc1), .ALUSrc2(ALUSrc2), .ExtOp(ExtOp), .LuOp(LuOp),	.ALUOp(ALUOp));
 	
+
+	// Register file.
 	wire [31:0] Databus1, Databus2, Databus3;
 	wire [4:0] Write_register;
 	assign Write_register = (RegDst == 2'b00)? Instruction[20:16]: (RegDst == 2'b01)? Instruction[15:11]: 5'b11111;
@@ -42,16 +49,22 @@ module CPU(reset, clk);
 		.Read_register1(Instruction[25:21]), .Read_register2(Instruction[20:16]), .Write_register(Write_register),
 		.Write_data(Databus3), .Read_data1(Databus1), .Read_data2(Databus2));
 	
+
+	// Immediate.
 	wire [31:0] Ext_out;
 	assign Ext_out = {ExtOp? {16{Instruction[15]}}: 16'h0000, Instruction[15:0]};
 	
 	wire [31:0] LU_out;
 	assign LU_out = LuOp? {Instruction[15:0], 16'h0000}: Ext_out;
 	
+
+	// ALU Control.
 	wire [4:0] ALUCtl;
 	wire Sign;
 	ALUControl alu_control1(.ALUOp(ALUOp), .Funct(Instruction[5:0]), .ALUCtl(ALUCtl), .Sign(Sign));
 	
+
+	// ALU.
 	wire [31:0] ALU_in1;
 	wire [31:0] ALU_in2;
 	wire [31:0] ALU_out;
@@ -60,16 +73,24 @@ module CPU(reset, clk);
 	assign ALU_in2 = ALUSrc2? LU_out: Databus2;
 	ALU alu1(.in1(ALU_in1), .in2(ALU_in2), .ALUCtl(ALUCtl), .Sign(Sign), .out(ALU_out), .zero(Zero));
 	
+
+	// Memory.
 	wire [31:0] Read_data;
 	DataMemory data_memory1(.reset(reset), .clk(clk), .Address(ALU_out), .Write_data(Databus2), .Read_data(Read_data), .MemRead(MemRead), .MemWrite(MemWrite));
 	assign Databus3 = (MemtoReg == 2'b00)? ALU_out: (MemtoReg == 2'b01)? Read_data: PC_plus_4;
 	
+
+	// Jump.
 	wire [31:0] Jump_target;
 	assign Jump_target = {PC_plus_4[31:28], Instruction[25:0], 2'b00};
 	
+
+	// Branch.
 	wire [31:0] Branch_target;
 	assign Branch_target = (Branch & Zero)? PC_plus_4 + {LU_out[29:0], 2'b00}: PC_plus_4;
 	
+
+	// Branch or PC + 4 / j / jr.
 	assign PC_next = (PCSrc == 2'b00)? Branch_target: (PCSrc == 2'b01)? Jump_target: Databus1;
 
 endmodule
