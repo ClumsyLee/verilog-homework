@@ -1,4 +1,3 @@
-
 module CPU(reset, clk);
 	input reset, clk;
 	
@@ -94,4 +93,3 @@ module CPU(reset, clk);
 	assign PC_next = (PCSrc == 2'b00)? Branch_target: (PCSrc == 2'b01)? Jump_target: Databus1;
 
 endmodule
-	

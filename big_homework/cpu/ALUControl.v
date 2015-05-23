@@ -1,4 +1,3 @@
-
 module ALUControl(ALUOp, Funct, ALUCtl, Sign);
 	input [3:0] ALUOp;
 	input [5:0] Funct;

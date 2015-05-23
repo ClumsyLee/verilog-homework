@@ -1,4 +1,3 @@
-
 module test_cpu();
 	
 	reg reset;

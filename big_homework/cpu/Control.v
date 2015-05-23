@@ -1,4 +1,3 @@
-
 module Control(OpCode, Funct,
 	PCSrc, Branch, RegWrite, RegDst, 
 	MemRead, MemWrite, MemtoReg, 

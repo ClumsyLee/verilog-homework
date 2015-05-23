@@ -1,4 +1,3 @@
-
 module ALU(in1, in2, ALUCtl, Sign, out, zero);
 	input [31:0] in1, in2;
 	input [4:0] ALUCtl;

@@ -1,4 +1,3 @@
-
 module RegisterFile(reset, clk, RegWrite, Read_register1, Read_register2, Write_register, Write_data, Read_data1, Read_data2);
 	input reset, clk;
 	input RegWrite;
@@ -20,4 +19,3 @@ module RegisterFile(reset, clk, RegWrite, Read_register1, Read_register2, Write_
 			RF_data[Write_register] <= Write_data;
 
 endmodule
-			

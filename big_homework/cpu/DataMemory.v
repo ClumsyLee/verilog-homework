@@ -1,4 +1,3 @@
-
 module DataMemory(reset, clk, Address, Write_data, Read_data, MemRead, MemWrite);
 	input reset, clk;
 	input [31:0] Address, Write_data;

@@ -1,4 +1,3 @@
-
 module InstructionMemory(Address, Instruction);
 	input [31:0] Address;
 	output reg [31:0] Instruction;
