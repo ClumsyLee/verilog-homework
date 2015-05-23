@@ -19,7 +19,61 @@ module Control(OpCode, Funct,
 	output [3:0] ALUOp;
 	
 	// Your code below
+
+	assign PCSrc =
+		(OpCode == 6'h02 || OpCode == 6'h03) ? 2'b01 :
+		(OpCode == 6'h00 && (Funct == 6'h08 ||
+							 Funct == 6'h09)) ? 2'b10 : 2'b00;
 	
+	assign Branch = (OpCode == 6'h04) ? 1'b1: 1'b0;
+
+	assign RegWrite =
+		(OpCode == 6'h2b ||
+		 OpCode == 6'h04 ||
+		 OpCode == 6'h02 ||
+		 OpCode == 6'h00 && Funct == 6'h08) ? 1'b0 : 1'b1;
+
+	assign RegDst =
+		(OpCode == 6'h23 ||
+		 OpCode == 6'h0f ||
+		 OpCode == 6'h08 ||
+		 OpCode == 6'h09 ||
+		 OpCode == 6'h0c ||
+		 OpCode == 6'h0a ||
+		 OpCode == 6'h0b) ? 2'b00 :
+		(OpCode == 6'h03 ||
+		 OpCode == 6'h00 && Funct == 6'h09) ? 2'b10 : 2'b01;
+
+	assign MemRead = (OpCode == 6'h23) ? 1'b1 : 1'b0;
+
+	assign MemWrite = (OpCode == 6'h2b) ? 1'b1 : 1'b0;
+
+	assign MemtoReg =
+		(OpCode == 6'h23) ? 2'b01 :
+		(OpCode == 6'h03 ||
+		 OpCode == 6'h00 && Funct == 6'h09) ? 2'b10 : 2'b00;
+
+	assign ALUSrc1 =
+		(OpCode == 6'h00 && (Funct == 6'h00 ||
+							 Funct == 6'h02 ||
+							 Funct == 6'h03)) ? 1'b1 : 1'b0;
+
+	assign ALUSrc2 =
+		(OpCode == 6'h23 ||
+		 OpCode == 6'h2b ||
+		 OpCode == 6'h0f ||
+		 OpCode == 6'h08 ||
+		 OpCode == 6'h09 ||
+		 OpCode == 6'h0c ||
+		 OpCode == 6'h0a ||
+		 OpCode == 6'h0b) ? 1'b1 : 1'b0;
+
+	assign ExtOp =
+		(OpCode == 6'h09 ||
+		 OpCode == 6'h0b) ? 1'b0 : 1'b1;
+
+	assign LuOp = (OpCode == 6'h0f) ? 1'b1 : 1'b0;
+
 	// Your code above
 	
 	assign ALUOp[2:0] = 
