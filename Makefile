@@ -1,4 +1,4 @@
-MODULES = $(wildcard exp*/*/ homework*/*/)
+MODULES = $(wildcard exp*/*/ *homework*/*/)
 
 .PHONY: all common modules
 
