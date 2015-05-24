@@ -1,0 +1,51 @@
+      0 anodes:xxxx, cathodes: 00000011, range_now: 0, count: 0000000000000000, ctrl: 0, reset_n: 1
+  99999 anodes:0111, cathodes: 00000011, range_now: 0, count: 0000000000000000, ctrl: 0, reset_n: 1
+ 299999 anodes:1011, cathodes: 00000011, range_now: 0, count: 0000000000000000, ctrl: 0, reset_n: 1
+ 499999 anodes:1101, cathodes: 00000011, range_now: 0, count: 0000000000000000, ctrl: 0, reset_n: 1
+ 699999 anodes:1110, cathodes: 00000011, range_now: 0, count: 0000000000000000, ctrl: 0, reset_n: 1
+ 899999 anodes:0111, cathodes: 00000011, range_now: 0, count: 0000000000000000, ctrl: 0, reset_n: 1
+1000000 anodes:0111, cathodes: 00000011, range_now: 0, count: 0000000000000001, ctrl: 0, reset_n: 1
+1099999 anodes:1011, cathodes: 00000011, range_now: 0, count: 0000000000000001, ctrl: 0, reset_n: 1
+1299999 anodes:1101, cathodes: 00000011, range_now: 0, count: 0000000000000001, ctrl: 0, reset_n: 1
+1499999 anodes:1110, cathodes: 10011111, range_now: 0, count: 0000000000000001, ctrl: 0, reset_n: 1
+1699999 anodes:0111, cathodes: 00000011, range_now: 0, count: 0000000000000001, ctrl: 0, reset_n: 1
+1899999 anodes:1011, cathodes: 00000011, range_now: 0, count: 0000000000000001, ctrl: 0, reset_n: 1
+2099999 anodes:1101, cathodes: 00000011, range_now: 0, count: 0000000000000001, ctrl: 0, reset_n: 1
+2299999 anodes:1110, cathodes: 10011111, range_now: 0, count: 0000000000000001, ctrl: 0, reset_n: 1
+2499999 anodes:0111, cathodes: 00000011, range_now: 0, count: 0000000000000001, ctrl: 0, reset_n: 1
+2699999 anodes:1011, cathodes: 00000011, range_now: 0, count: 0000000000000001, ctrl: 0, reset_n: 1
+2899999 anodes:1101, cathodes: 00000011, range_now: 0, count: 0000000000000001, ctrl: 0, reset_n: 1
+3000000 anodes:1101, cathodes: 00000011, range_now: 0, count: 0000000000000010, ctrl: 0, reset_n: 1
+3099999 anodes:1110, cathodes: 00100101, range_now: 0, count: 0000000000000010, ctrl: 0, reset_n: 1
+3299999 anodes:0111, cathodes: 00000011, range_now: 0, count: 0000000000000010, ctrl: 0, reset_n: 1
+3499999 anodes:1011, cathodes: 00000011, range_now: 0, count: 0000000000000010, ctrl: 0, reset_n: 1
+3699999 anodes:1101, cathodes: 00000011, range_now: 0, count: 0000000000000010, ctrl: 0, reset_n: 1
+3899999 anodes:1110, cathodes: 00100101, range_now: 0, count: 0000000000000010, ctrl: 0, reset_n: 1
+4099999 anodes:0111, cathodes: 00000011, range_now: 0, count: 0000000000000010, ctrl: 0, reset_n: 1
+4299999 anodes:1011, cathodes: 00000011, range_now: 0, count: 0000000000000010, ctrl: 0, reset_n: 1
+4499999 anodes:1101, cathodes: 00000011, range_now: 0, count: 0000000000000010, ctrl: 0, reset_n: 1
+4699999 anodes:1110, cathodes: 00100101, range_now: 0, count: 0000000000000010, ctrl: 0, reset_n: 1
+4899999 anodes:0111, cathodes: 00000011, range_now: 0, count: 0000000000000010, ctrl: 0, reset_n: 1
+5000000 anodes:0111, cathodes: 00000011, range_now: 0, count: 0000000000000011, ctrl: 0, reset_n: 1
+5099999 anodes:1011, cathodes: 00000011, range_now: 0, count: 0000000000000011, ctrl: 0, reset_n: 1
+5299999 anodes:1101, cathodes: 00000011, range_now: 0, count: 0000000000000011, ctrl: 0, reset_n: 1
+5499999 anodes:1110, cathodes: 00001101, range_now: 0, count: 0000000000000011, ctrl: 0, reset_n: 1
+5699999 anodes:0111, cathodes: 00000011, range_now: 0, count: 0000000000000011, ctrl: 0, reset_n: 1
+5899999 anodes:1011, cathodes: 00000011, range_now: 0, count: 0000000000000011, ctrl: 0, reset_n: 1
+6099999 anodes:1101, cathodes: 00000011, range_now: 0, count: 0000000000000011, ctrl: 0, reset_n: 1
+6299999 anodes:1110, cathodes: 00001101, range_now: 0, count: 0000000000000011, ctrl: 0, reset_n: 1
+6499999 anodes:0111, cathodes: 00000011, range_now: 0, count: 0000000000000011, ctrl: 0, reset_n: 1
+6699999 anodes:1011, cathodes: 00000011, range_now: 0, count: 0000000000000011, ctrl: 0, reset_n: 1
+6899999 anodes:1101, cathodes: 00000011, range_now: 0, count: 0000000000000011, ctrl: 0, reset_n: 1
+7000000 anodes:1101, cathodes: 00000011, range_now: 0, count: 0000000000000100, ctrl: 0, reset_n: 1
+7099999 anodes:1110, cathodes: 10011001, range_now: 0, count: 0000000000000100, ctrl: 0, reset_n: 1
+7299999 anodes:0111, cathodes: 00000011, range_now: 0, count: 0000000000000100, ctrl: 0, reset_n: 1
+7499999 anodes:1011, cathodes: 00000011, range_now: 0, count: 0000000000000100, ctrl: 0, reset_n: 1
+7699999 anodes:1101, cathodes: 00000011, range_now: 0, count: 0000000000000100, ctrl: 0, reset_n: 1
+7899999 anodes:1110, cathodes: 10011001, range_now: 0, count: 0000000000000100, ctrl: 0, reset_n: 1
+8099999 anodes:0111, cathodes: 00000011, range_now: 0, count: 0000000000000100, ctrl: 0, reset_n: 1
+8299999 anodes:1011, cathodes: 00000011, range_now: 0, count: 0000000000000100, ctrl: 0, reset_n: 1
+8499999 anodes:1101, cathodes: 00000011, range_now: 0, count: 0000000000000100, ctrl: 0, reset_n: 1
+8699999 anodes:1110, cathodes: 10011001, range_now: 0, count: 0000000000000100, ctrl: 0, reset_n: 1
+8899999 anodes:0111, cathodes: 00000011, range_now: 0, count: 0000000000000100, ctrl: 0, reset_n: 1
+9000000 anodes:0111, cathodes: 00000011, range_now: 0, count: 0000000000000101, ctrl: 0, reset_n: 1
