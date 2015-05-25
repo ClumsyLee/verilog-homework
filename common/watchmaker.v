@@ -1,3 +1,5 @@
+`timescale 10ns/1ns
+
 module watchmaker(new_clk, clk);
 
 output reg new_clk = 0;

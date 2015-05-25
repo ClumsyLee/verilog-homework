@@ -1,6 +1,6 @@
 # Executable
 *.out
-sim
+sim*
 
 # Sublime project files
 *.sublime-project
@@ -13,6 +13,7 @@ sim
 
 # Large binaries
 *.pdf
+*.zip
 
 # Result files
 homework*/*/result.txt
