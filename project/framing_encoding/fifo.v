@@ -64,13 +64,19 @@ always @(*) begin
         TRANSFERING:
             if (head > 0) begin  // More to be transfer.
                 next_state = TRANSFERING;
-                next_head = head - 8;
+                if (count < 7) begin
+                    next_head = head;
+                    next_count = count + 1;
+                end else begin
+                    next_head = head - 8;
+                    next_count = 0;
+                end
             end else begin
                 next_state = RIGHT_PADDING;
                 next_head = 0;
+                next_count = 0;
             end
             next_queue = queue;
-            next_count = 0;
 
         RIGHT_PADDING:
             if (count < 15) begin
