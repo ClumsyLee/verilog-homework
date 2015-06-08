@@ -10,7 +10,13 @@ module framing_encoding_test;
      reg              reset_n;
  
  
- 
+initial begin
+  $monitor($time, " indicator: %b, framing_out: %h, whiting_out: %h, serializing_out: %h",
+           framing_encoding_out_valid,
+           u0framing_encoding.framing_crc_out,
+           u0framing_encoding.whiting_out,
+           framing_encoding_out);
+end
 
  framing_encoding u0framing_encoding(
                                     .framing_encoding_out        (framing_encoding_out),
@@ -24,7 +30,7 @@ module framing_encoding_test;
 // stop simulation after 20000us
   initial 
     begin
-    #20000 $stop;
+    #20000 $finish;
     end
 
 
