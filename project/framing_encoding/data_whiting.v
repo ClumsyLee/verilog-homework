@@ -99,7 +99,7 @@ always @(posedge clk or negedge reset_n) begin
     end
 end
 
-assign next_indicator = (state == WAITING && indicator ||
+assign next_indicator = (state == PADDING && count == 7 ||
                          state == RIGHT_PADDING && count == 7);
 
 endmodule
