@@ -1,4 +1,4 @@
-module crc(
+module framing_crc(
     output reg [7:0] dout,
     output next_indicator,
     input [7:0] din,
@@ -22,15 +22,16 @@ wire crc_in = din[(count[2:0])-:1] ^ crc[0];
 
 always @(*) begin
     case (state)
-        WAITING:
+        WAITING: begin
             if (indicator)
                 next_state = SHR;
             else
                 next_state = WAITING;
             next_count = 0;
             next_crc = CRC_INIT;
+        end
 
-        SHR:
+        SHR: begin
             if (count < 79) begin
                 next_state = SHR;
                 next_count = count + 1;
@@ -39,8 +40,9 @@ always @(*) begin
                 next_count = 0;
             end
             next_crc = CRC_INIT;
+        end
 
-        PHR_PSDU:
+        PHR_PSDU: begin
             next_state = (indicator ? FCS : PHR_PSDU);
             next_count = (count == 7 ? 0 : count + 1);
             next_crc = {crc_in,
@@ -49,8 +51,9 @@ always @(*) begin
                         crc[10:5],
                         crc[4] ^ crc_in,
                         crc[3:1]};
+        end
 
-        FCS:
+        FCS: begin
             if (count < 15) begin
                 next_state = FCS;
                 next_count = count + 1;
@@ -60,11 +63,13 @@ always @(*) begin
                 next_count = 0;
                 next_crc = CRC_INIT;
             end
+        end
 
-        default:
+        default: begin
             next_state = WAITING;
             next_count = 0;
             next_crc = CRC_INIT;
+        end
     endcase
 end
 
@@ -95,7 +100,7 @@ always @(*) begin
             dout = din;
 
         FCS:
-            dout = (count < 8 ? crc[7:0] : crc[15:8])
+            dout = (count < 8 ? crc[7:0] : crc[15:8]);
 
         default:
             dout = 0;
