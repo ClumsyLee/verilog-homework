@@ -100,7 +100,7 @@ always @(*) begin
             dout = din;
 
         FCS:
-            dout = (count < 8 ? crc[7:0] : crc[15:8]);
+            dout = ~(count < 8 ? crc[7:0] : crc[15:8]);
 
         default:
             dout = 0;
