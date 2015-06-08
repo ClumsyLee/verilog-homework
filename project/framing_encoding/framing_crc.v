@@ -107,7 +107,7 @@ always @(*) begin
     endcase
 end
 
-wire next_indicator = (state == WAITING && indicator ||
-                       state == FCS && count == 15);
+assign next_indicator = (state == WAITING && indicator ||
+                         state == FCS && count == 15);
 
 endmodule
