@@ -113,7 +113,7 @@ always @(posedge clk or negedge reset_n) begin
 end
 
 assign dout = (head == 0) ? 0 : queue[(head - 1)-:8],
-       indicator = (state == LEFT_PADDING || state == RIGHT_PADDING) &&
-                    count == 0;
+       indicator = (state == RECEIVING && ~din_valid) ||
+                   (state == TRANSFERING && head == 0);
 
 endmodule
