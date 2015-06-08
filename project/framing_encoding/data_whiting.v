@@ -53,9 +53,10 @@ always @(*) begin
             if (indicator) begin
                 next_state = RIGHT_PADDING;
                 next_count = 0;
-            else
+            end else begin
                 next_state = ENCODING;
                 next_count = count + 1;
+            end
             next_dout = (count[2:0] == 7 ? din ^ random_regs[7:0] : dout);
             next_random_regs = next_random;
         end
@@ -78,6 +79,7 @@ always @(*) begin
             next_state = WAITING;
             next_count = 0;
             next_dout = 0;
+            next_random_regs = RANDOM_INIT;
         end
     endcase
 end
@@ -88,10 +90,12 @@ always @(posedge clk or negedge reset_n) begin
         state <= WAITING;
         count <= 0;
         dout <= 0;
+        random_regs <= RANDOM_INIT;
     end else begin
         state <= next_state;
         count <= next_count;
         dout <= next_dout;
+        random_regs <= next_random_regs;
     end
 end
 
