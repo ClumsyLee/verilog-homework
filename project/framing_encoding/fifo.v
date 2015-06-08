@@ -17,14 +17,14 @@ localparam WAITING = 0,
            TRANSFERING = 3,
            RIGHT_PADDING = 4;
 
-reg state, next_state;
+reg [2:0] state, next_state;
 reg [MAX_INDEX:0] queue, next_queue;
 reg [INDEX_WIDTH - 1:0] head, next_head;  // The head of the queue.
 reg [6:0] count, next_count;
 
 always @(*) begin
     case (state)
-        WAITING:
+        WAITING: begin
             if (din_valid) begin
                 next_state = RECEIVING;
                 next_queue = {queue[MAX_INDEX - 8:0],
@@ -36,8 +36,9 @@ always @(*) begin
                 next_head = 0;
             end
             next_count = 0;
+        end
 
-        RECEIVING:
+        RECEIVING: begin
             if (din_valid) begin
                 next_state = RECEIVING;
                 next_queue = {queue[MAX_INDEX - 8:0],
@@ -49,8 +50,9 @@ always @(*) begin
                 next_head = head;
             end
             next_count = 0;
+        end
 
-        LEFT_PADDING:
+        LEFT_PADDING: begin
             if (count < 79) begin
                 next_state = LEFT_PADDING;
                 next_count = count + 1;
@@ -60,25 +62,25 @@ always @(*) begin
             end
             next_head = head;
             next_queue = queue;
+        end
 
-        TRANSFERING:
-            if (head > 0) begin  // More to be transfer.
+        TRANSFERING: begin
+            if (count < 7) begin
                 next_state = TRANSFERING;
-                if (count < 7) begin
-                    next_head = head;
-                    next_count = count + 1;
-                end else begin
-                    next_head = head - 8;
-                    next_count = 0;
-                end
+                next_head = head;
+                next_count = count + 1;
             end else begin
-                next_state = RIGHT_PADDING;
-                next_head = 0;
+                if (head == 8)  // Last byte.
+                    next_state = RIGHT_PADDING;
+                else
+                    next_state = TRANSFERING;
+                next_head = head - 8;
                 next_count = 0;
             end
             next_queue = queue;
+        end
 
-        RIGHT_PADDING:
+        RIGHT_PADDING: begin
             if (count < 15) begin
                 next_state = RIGHT_PADDING;
                 next_count = count + 1;
@@ -88,12 +90,14 @@ always @(*) begin
             end
             next_head = 0;
             next_queue = 0;
+        end
 
-        default:
+        default: begin
             next_state = WAITING;
             next_queue = 0;
             next_head = 0;
             next_count = 0;
+        end
     endcase
 end
 
@@ -114,6 +118,6 @@ end
 
 assign dout = (head == 0) ? 0 : queue[(head - 1)-:8],
        indicator = (state == RECEIVING && ~din_valid) ||
-                   (state == TRANSFERING && head == 0);
+                   (state == TRANSFERING && next_state == RIGHT_PADDING);
 
 endmodule
