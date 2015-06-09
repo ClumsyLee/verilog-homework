@@ -1,5 +1,5 @@
 module data_whiting(
-    output reg [7:0] dout,
+    output [7:0] dout,
     output next_indicator,
     input [7:0] din,
     input indicator,
@@ -7,19 +7,17 @@ module data_whiting(
     input reset_n
 );
 
-localparam RANDOM_INIT = 1;
+localparam RANDOM_INIT = 9'b1_1111_1111;
 
 localparam WAITING = 0,
            PADDING = 1,
-           ENCODING = 2,
-           RIGHT_PADDING = 3;
+           ENCODING = 2;
 
 reg [1:0] state, next_state;
 reg [6:0] count, next_count;
 
-reg [7:0] next_dout;
-
 reg [8:0] random_regs, next_random_regs;
+reg [7:0] working_random, next_working_random;
 wire [8:0] next_random = {random_regs[5] ^ random_regs[0], random_regs[8:1]};
 
 always @(*) begin
@@ -30,8 +28,8 @@ always @(*) begin
             else
                 next_state = WAITING;
             next_count = 0;
-            next_dout = 0;
             next_random_regs = RANDOM_INIT;
+            next_working_random = RANDOM_INIT;
         end
 
         PADDING: begin
@@ -44,42 +42,28 @@ always @(*) begin
                 next_count = 0;
                 next_random_regs = next_random;
             end
-
-            // Making a 8-clk delay.
-            next_dout = (count[2:0] == 7 ? din : dout);
+            next_working_random = RANDOM_INIT;
         end
 
         ENCODING: begin
             if (indicator) begin
-                next_state = RIGHT_PADDING;
+                next_state = WAITING;
                 next_count = 0;
             end else begin
                 next_state = ENCODING;
                 next_count = count + 1;
             end
-            next_dout = (count[2:0] == 7 ? din ^ random_regs[7:0] : dout);
             next_random_regs = next_random;
-        end
-
-        RIGHT_PADDING: begin
-            if (count < 7) begin
-                next_state = RIGHT_PADDING;
-                next_count = count + 1;
-                next_dout = dout;
-                next_random_regs = next_random;
-            end else begin
-                next_state = WAITING;
-                next_count = 0;
-                next_dout = 0;
-                next_random_regs = RANDOM_INIT;
-            end
+            next_working_random = (count[2:0] == 7 ?
+                                   random_regs :
+                                   working_random);
         end
 
         default: begin
             next_state = WAITING;
             next_count = 0;
-            next_dout = 0;
             next_random_regs = RANDOM_INIT;
+            next_working_random = RANDOM_INIT;
         end
     endcase
 end
@@ -89,17 +73,18 @@ always @(posedge clk or negedge reset_n) begin
     if (~reset_n) begin
         state <= WAITING;
         count <= 0;
-        dout <= 0;
         random_regs <= RANDOM_INIT;
+        working_random <= RANDOM_INIT;
     end else begin
         state <= next_state;
         count <= next_count;
-        dout <= next_dout;
         random_regs <= next_random_regs;
+        working_random <= next_working_random;
     end
 end
 
-assign next_indicator = (state == PADDING && count == 7 ||
-                         state == RIGHT_PADDING && count == 7);
+assign next_indicator = indicator;
+
+assign dout = (state == ENCODING ? din ^ working_random : din);
 
 endmodule
