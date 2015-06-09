@@ -1,3 +1,5 @@
+`timescale 1us/100ns
+
 module fifo(
     output [7:0] dout,
     output indicator,  // Indicates a state change.

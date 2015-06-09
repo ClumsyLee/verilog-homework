@@ -1,3 +1,5 @@
+`timescale 1us/100ns
+
 module serializing(
     output dout,
     output dout_valid,

@@ -1,3 +1,5 @@
+`timescale 1us/100ns
+
 module data_whiting(
     output [7:0] dout,
     output next_indicator,

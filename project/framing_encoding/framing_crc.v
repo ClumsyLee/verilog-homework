@@ -1,3 +1,5 @@
+`timescale 1us/100ns
+
 module framing_crc(
     output reg [7:0] dout,
     output next_indicator,

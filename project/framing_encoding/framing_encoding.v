@@ -1,3 +1,5 @@
+`timescale 1us/100ns
+
 module framing_encoding(
     output framing_encoding_out,
     output framing_encoding_out_valid,
