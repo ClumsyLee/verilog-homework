@@ -94,9 +94,9 @@ always @(*) begin
             if (count < 64)
                 dout = 8'haa;
             else if (count < 72)
-                dout = 8'hf3;
-            else
                 dout = 8'h98;
+            else
+                dout = 8'hf3;
         
         PHR_PSDU:
             dout = din;
