@@ -25,10 +25,10 @@ module framing_encoding(
 由于输入速度和输出速度可能不匹配，并且在输出前导码和帧分隔符时输入数据会继续到来，故需要一
 FIFO 将输入的数据进行暂存。
 
-同时注意到，framing_crc 模块需要一个信号来指示开始组帧，故 fifo 模块还需要输出一个
-indicator 控制信号。
+同时注意到，framing_crc 模块需要一个信号来指示 SHR 的开始和 PSDU 的结束，故 fifo 模块
+还需要输出一个 indicator 控制信号。
 
-具体的接口设计如下：
+具体的端口设计如下：
 
 ```verilog
 module fifo(
@@ -51,8 +51,19 @@ module fifo(
 - `TRANSFERING`
 - `RIGHT_PADDING`
 
+虽然 FIFO 的最大吞吐量是 1B/s，然而串行输出的特点决定了整个系统的最大吞吐量为 1bit/s。
+所以，我们将 FIFO 设计成将每个字节传送 8 个时钟周期，以方便后续模块进行处理。
+
 
 ### Framing & CRC
+
+注意到 CRC 算法可以在接收数据的同时进行计算，即在输入的最后一字节保持 8 个时钟周期之后，
+CRC 的两字节已经可以开始输出。所以我们可以在接收 PHR 和 PSDU 时透明传输，然后紧接着输出
+FCS，从而不会带来额外的延时。
+
+综上，`framing_crc` 模块的作用是为帧加上 SHR 和 FCS 字段。
+
+具体的端口设计如下：
 
 ```verilog
 module framing_crc(
@@ -66,8 +77,12 @@ module framing_crc(
 ```
 
 
-
 ### Data Whiting
+
+和 Framing & CRC 端一样，白化也可以做到在接受数据的同时同步进行。故白化模块也不会造成
+额外的延时。
+
+具体的端口设计如下：
 
 ```verilog
 module data_whiting(
@@ -82,6 +97,11 @@ module data_whiting(
 
 
 ### Serializing
+
+由于之前的模块在输出每个字节时都保持了 8 个时钟周期，故 Serializing 模块只需要在接到
+indicator 信号之后循环输出 din 的各个位，并在再次接收到 indicator 信号之后结束。
+
+具体的端口设计如下：
 
 ```verilog
 module serializing(
@@ -197,6 +217,9 @@ Wire Load Model Mode: top
 ## 门级仿真
 
 ![NC 门级仿真结果](door-level-sim.png)
+
+可以看到门级仿真的结果与之前几乎完全一样，故我们可以说综合实现了电路的预期功能。
+
 
 ## 布局布线
 
