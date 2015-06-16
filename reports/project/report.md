@@ -22,6 +22,35 @@ module framing_encoding(
 
 ### FIFO
 
+由于输入速度和输出速度可能不匹配，并且在输出前导码和帧分隔符时输入数据会继续到来，故需要一
+FIFO 将输入的数据进行暂存。
+
+同时注意到，framing_crc 模块需要一个信号来指示开始组帧，故 fifo 模块还需要输出一个
+indicator 控制信号。
+
+具体的接口设计如下：
+
+```verilog
+module fifo(
+    output [7:0] dout,
+    output indicator,  // Indicates a state change.
+    input [7:0] din,
+    input din_valid,
+    input clk,
+    input reset_n
+);
+```
+
+
+同时，为了给 framing_crc 模块留下组帧的空间，我们在出栈时为那些数据留出了位置。FIFO 共有
+如下 5 个状态：
+
+- `WAITING`
+- `RECEIVING`
+- `LEFT_PADDING`
+- `TRANSFERING`
+- `RIGHT_PADDING`
+
 
 ### Framing & CRC
 
@@ -72,6 +101,8 @@ module serializing(
 
 
 ## DC 综合
+
+![符号图 & 原理图](符号图原理图.png)
 
 ### Area Report
 
@@ -166,6 +197,38 @@ Wire Load Model Mode: top
 ## 门级仿真
 
 ![NC 门级仿真结果](door-level-sim.png)
+
+## 布局布线
+
+### Add Power Rings
+![Add Power Rings](add-power-rings.png)
+
+### Placement
+![Placement](placement.png)
+
+### Special Route
+![Special Route](special-route.png)
+
+### Create Clock Tree
+![Create Clock Tree](clk-tree.png)
+
+### Trail Routing
+![Trail Routing](trail-routing.png)
+
+### Nano Routing
+![Nano Routing](nano-routing.png)
+
+### Add Filling
+![Add Filling](add-filling.png)
+
+### Post–Route Optimization
+![Post–Route Optimization](add-filling-opt.png)
+
+### Verify Geometry
+![Verify Geometry](verify-geometry.png)
+
+### Area Route
+![Area Route](area-route.png)
 
 
 ## 源代码
