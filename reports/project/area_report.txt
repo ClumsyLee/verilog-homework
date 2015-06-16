@@ -1,0 +1,23 @@
+****************************************
+Report : area
+Design : framing_encoding
+Version: D-2010.03
+Date   : Tue Jun  9 22:40:45 2015
+****************************************
+
+Information: Updating design information... (UID-85)
+Library(s) Used:
+
+    typical (File: /software/course_lib_umc18/tt_1v8_25c.db)
+
+Number of ports:               13
+Number of nets:                40
+Number of cells:                4
+Number of references:           4
+
+Combinational area:       10677.744225
+Noncombinational area:    16465.680237
+Net Interconnect area:    118627.274841
+
+Total cell area:          27143.424461
+Total area:               145770.699303
