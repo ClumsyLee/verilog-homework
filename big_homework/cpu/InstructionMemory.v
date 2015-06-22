@@ -1,7 +1,7 @@
 module InstructionMemory(Address, Instruction);
 	input [31:0] Address;
 	output reg [31:0] Instruction;
-	
+
 	always @(*)
 		case (Address[9:2])
 			8'd0 : Instruction <= {6'h08, 5'd0, 5'd4, 16'd3};
@@ -22,8 +22,8 @@ module InstructionMemory(Address, Instruction);
 			8'd15: Instruction <= {6'h08, 5'd29, 5'd29, 16'd8};
 			8'd16: Instruction <= {6'h00, 5'd4, 5'd2, 5'd2, 5'd0, 6'h20};
 			8'd17: Instruction <= {6'h00, 5'd31, 15'd0, 6'h08};
-			
+
 			default: Instruction <= 32'h00000000;
 		endcase
-		
+
 endmodule
