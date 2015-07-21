@@ -31,7 +31,7 @@ f) 不需要修改。因为 nop 指令相当于 sll $zero, $zero, 0，而由于�
 
 ### 填写真值表
 
-|       | PC<br>Sr<br>c[1:<br>0] | Br<br>an<br>ch | Re<br>gW<br>ri<br>te | Re<br>gD<br>st<br>[1:<br>0] | Me<br>mR<br>ea<br>d | Me<br>mW<br>ri<br>te | Me<br>mt<br>oR<br>eg<br>[1:<br>0] | AL<br>US<br>rc<br>1 | AL<br>US<br>rc<br>2 | Ex<br>to<br>p | Lu<br>op |
+|       | PCSrc[1:0] | Branch | RegWrite | RegDst[1:0] | MemRead | MemWrite | MemtoReg[1:0] | ALUSrc1 | ALUSrc2 | Extop | Luop |
 |-------|------------|--------|----------|-------------|---------|----------|---------------|---------|---------|-------|------|
 | lw    |          0 | 0      |        1 | 0           |       1 |        0 | 1             | 0       | 1       | 1     | 0    |
 | sw    |          0 | 0      |        0 | x           |       0 |        1 | x             | 0       | 1       | 1     | 0    |
